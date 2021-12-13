@@ -15,4 +15,7 @@ class Test
     public function modifytwo(){
         echo "modify2";
     }
+    public function checkout(){
+        echo "checkout";
+    }
 }
