@@ -10,9 +10,9 @@ class Test3
         echo "modify";
     }
 
-    public function bug(){
+    public function bug() {
         echo "bug xiufu";
-
+    }
     public function stash(){
         echo "stash";
 
