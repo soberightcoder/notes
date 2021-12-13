@@ -17,5 +17,6 @@ class Test
     }
     public function checkout(){
         echo "checkout";
+        echo "ceshi";
     }
 }
