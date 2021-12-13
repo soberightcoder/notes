@@ -12,4 +12,7 @@ class Test
     public function modify(){
         echo "modify";
     }
+    public function modifytwo(){
+        echo "modify2";
+    }
 }
