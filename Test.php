@@ -9,4 +9,7 @@ class Test
     public function back(){
         echo "back";
     }
+    public function modify(){
+        echo "modify";
+    }
 }
