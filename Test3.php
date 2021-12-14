@@ -15,5 +15,8 @@ class Test3
     public function bug_solve(){
         echo "solve bug";
     }
+    public function gitpushu(){
+        echo "git push -u";
+    }
 
 }
