@@ -12,4 +12,8 @@ class Test3
     public function stash(){
         echo "stash";
     }
+    public function bug_solve(){
+        echo "solve bug";
+    }
+
 }
