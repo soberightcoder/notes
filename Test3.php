@@ -17,4 +17,8 @@ class Test3
         echo "stash";
 
     }
+    public function ide(){
+        echo 'ide commit';
+    }
+
 }
