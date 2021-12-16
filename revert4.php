@@ -6,3 +6,4 @@ echo "revert3-------43";
 
 
 echo "master commit_id";
+echo "really debug_success";
