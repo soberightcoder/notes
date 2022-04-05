@@ -20,6 +20,7 @@ class Test
         echo "ceshi";
         echo "ceshigitcheckout";
         echo "ceshi-git-checkout--file";
+        echo "git ceshi upstream";
 
     }
 }
