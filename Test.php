@@ -10,14 +10,16 @@ class Test
         echo "back";
     }
     public function modify(){
-        echo "modify";
-    }
+        echo "modifce";
+}
     public function modifytwo(){
         echo "modify2";
     }
     public function checkout(){
         echo "checkout";
         echo "ceshi";
+        echo "ceshigitcheckout";
+        echo "ceshi-git-checkout--file";
 
     }
 }
