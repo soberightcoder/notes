@@ -8,4 +8,3 @@ echo "revert3-------43";
 echo "really_master_commit_id";
 echo "master commit_id";
 echo "really debug_success";
-echo "ceshi--revert";
