@@ -27,7 +27,7 @@ class Test
     public function debug(){
         echo "debug success";
     }
-    public function debug_revert(){
+    public function debug_revert333(){
        echo "revert-ceshi1";
     }
 }
