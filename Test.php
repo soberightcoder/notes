@@ -22,5 +22,6 @@ class Test
         echo "ceshi-git-checkout--file";
         echo "git ceshi upstream";
         echo "ceshi";
+        echo "ceshi-ceshi-branch";
     }
 }
