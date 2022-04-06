@@ -25,6 +25,6 @@ class Test
         echo "ceshi-ceshi";
     }
     public function debug(){
-        echo "ceshi-debug";
+        echo "debug success";
     }
 }
