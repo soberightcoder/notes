@@ -31,4 +31,7 @@ class Test
        echo "debug success";
        echo "debug_revert333_debug_success";
     }
+    public function debug_success(){
+        echo "debug success";
+    }
 }
