@@ -27,7 +27,8 @@ class Test
     public function debug(){
         echo "debug success";
     }
-    public function debug_revert_debug(){
+    public function debug_revert_debug_success(){
        echo "debug success";
+       echo "debug_revert333_debug_success";
     }
 }
