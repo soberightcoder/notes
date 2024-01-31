@@ -1,0 +1,179 @@
+## 数据库的两种操作方式
+
+>modl 和 DB来 两种方式来操作数据库；
+
+---
+
+## 数据库连接问题，怎么检查有没有连接上数据库；
+
+````php
+// 原生的sql查询；原生的sql语句；
+DB::select("select * from t");  //直接用DB检查就行；
+````
+
+
+
+---
+
+
+
+## model -- 一般会使用模型 模型会有很多其他的功能；当然他的底层依然是DB  --- 就是ORM---对象关系映射（英语：Object Relational Mapping，简称*ORM*，或O/RM，或O/R mapping），
+
+````php
+php artisan make:controller Test/DBController // 创建一个 控制器类；
+php artisan make:model // 模型名称；
+//php artisan make:model Test/Laravel
+//模型名字一般都是和表名是对应的；当然你也可以自己去设置表名；
+//Laravel 是模型类；
+Laravel::all(); //利用数据库的名字 就是一个对象 来进行操作呢；
+````
+
+
+
+
+
+----
+
+## DB类；
+
+````php
+// 原生的sql查询；原生的sql语句；
+DB::select("select * from t");
+DB::table('t')->get(); // 获取到数据；
+````
+
+---
+
+
+
+使用多数据库连接
+当使用多数据库连接时，你可以通过 DB Facade 门面的 connection 方法访问每一个连接。传递给 connection 方法的参数 name 应该是 config/database.php 配置文件中 connections 数组中的一个值：
+
+````php
+$users = DB::connection('foo')->select(...);
+````
+
+----
+
+
+
+DB类，原生sql语句的执行；
+
+`````php
+## 注意 我们执行sql语句的时候一定要用预处理；防止sql注入；
+使用命名绑定
+除了使用 ? 表示参数绑定外，你还可以使用命名绑定的形式来执行一个查询：
+
+$results = DB::select('select * from users where id = :id', ['id' => 1]);
+
+执行 Insert 语句
+你可以使用 DB Facade 的 insert 方法来执行 insert 语句。与 select 方法一样，该方法将原生 SQL 查询作为其第一个参数，并将绑定的数据作为第二个参数：
+
+DB::insert('insert into users (id, name) values (?, ?)', [1, 'Dayle']);
+
+执行 Update 语句
+update 方法用于更新数据库中现有的记录。该方法返回该执行语句影响的行数：
+
+$affected = DB::update('update users set votes = 100 where name = ?', ['John']);
+
+执行 Delete 语句
+delete 方法用于从数据库中删除记录。与 update 方法一样，返回受该执行语句影响的行数：
+
+$deleted = DB::delete('delete from users');
+
+
+
+执行普通语句
+有些数据库语句不会有任何返回值。对于这些语句，你可以使用 DB Facade 的 statement 方法来运行：
+
+DB::statement('drop table users');
+
+`````
+
+---
+
+
+
+##监听查询事件  todo  没有搞明白以后搞吧；
+
+如果你想监控程序执行的每一个 SQL 查询，你可以使用 listen 方法。这个方法对于记录查询或调试非常有用。你可以在 服务提供器 中注册你的查询监听器：
+
+
+
+```php
+<?php
+
+namespace App\Providers;
+
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\ServiceProvider;
+
+class AppServiceProvider extends ServiceProvider
+{
+    /**
+     * 注册所有应用的服务
+     *
+     * @return void
+     */
+    public function register()
+    {
+        //
+    }
+/**
+ * 引导所有应用的服务
+ *
+ * @return void
+ */
+public function boot()
+{
+    DB::listen(function ($query) {
+        // $query->sql
+        // $query->bindings
+        // $query->time
+    });
+}
+}
+```
+---
+
+
+
+##事务的处理
+
+>**事务的处理直接用DB 就行了；**
+
+你可以使用 DB facade 的 transaction 方法在数据库事务中运行一组操作。如果事务的闭包 Closure 中出现一个异常，事务将会回滚。如果事务闭包 Closure 执行成功，事务将自动提交。一旦你使用了 transaction， 就不必担心手动回滚或提交的问题：
+
+```php
+DB::transaction(function () {
+    DB::table('users')->update(['votes' => 1]);
+    DB::table('posts')->delete();
+});
+```
+
+
+处理死锁
+transaction 方法接受一个可选的第二个参数，该参数用来表示事务发生死锁时重复执行的次数。一旦定义的次数尝试完毕，就会抛出一个异常： **都锁住了 还运行个啥？？**
+
+```php
+DB::transaction(function () {
+     DB::table('users')->update(['votes' => 1]);
+	DB::table('posts')->delete();
+}, 5);
+```
+----
+
+
+
+##手动使用事务
+如果你想要手动开始一个事务，并且对回滚和提交能够完全控制，那么你可以使用 DB Facade 的 beginTransaction 方法：
+
+`````php
+//DB::beginTransaction();
+你可以使用 rollBack 方法回滚事务：
+
+//DB::rollBack();
+最后，你可以使用 commit 方法提交事务：
+
+//DB::commit();
+`````
